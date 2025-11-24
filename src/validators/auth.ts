@@ -74,6 +74,7 @@ export const ResetPasswordSchema = z
   .object({
     newPassword: passwordSchema,
     confirmNewPassword: passwordSchema,
+    email: emailSchema,
   })
   .refine(
     (data) => {

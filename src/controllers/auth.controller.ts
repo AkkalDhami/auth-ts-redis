@@ -292,7 +292,7 @@ export const resetPassword = AsyncHandler(
       );
     }
 
-    const { newPassword } = data;
+    const { newPassword, email } = data;
 
     const hashedResetPasswordToken = req.cookies?.hashedResetPasswordToken;
     const resetPasswordExpiry = req.cookies?.resetPasswordExpiry;
@@ -308,7 +308,7 @@ export const resetPassword = AsyncHandler(
       );
     }
 
-    const user = await User.findById(req?.user?._id).select("+password");
+    const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
       return ApiResponse.NotFound(res, "User not found");
